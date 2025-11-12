@@ -1,0 +1,33 @@
+using System;
+
+class Nodo {
+    public int Valor;
+    public Nodo Siguiente;
+    public Nodo Anterior;
+    public Nodo(int valor) { Valor = valor; }
+}
+
+class ListaDoble {
+    private Nodo primero, ultimo;
+    
+    public void Agregar(int valor) {
+        Nodo nuevo = new Nodo(valor);
+        if (ultimo == null) primero = ultimo = nuevo;
+        else { ultimo.Siguiente = nuevo; nuevo.Anterior = ultimo; ultimo = nuevo; }
+    }
+    
+    public void Mostrar() {
+        Nodo actual = primero;
+        while (actual != null) { Console.Write(actual.Valor + " "); actual = actual.Siguiente; }
+        Console.WriteLine();
+    }
+}
+
+class Program {
+    static void Main() {
+        ListaDoble lista = new ListaDoble();
+        int[] nums = {1, 32, 4, 12, 54, 36, 73};
+        foreach (int n in nums) lista.Agregar(n);
+        lista.Mostrar();
+    }
+}
