@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+    Nodo* anterior;
+    
+    Nodo(int valor) : dato(valor), siguiente(nullptr), anterior(nullptr) {}
+};
+
+int main() {
+    std::vector<int> valores = {1, 32, 4, 12, 32, 54, 36, 73};
+    std::vector<Nodo*> nodos;
+    
+    for (int valor : valores) {
+        nodos.push_back(new Nodo(valor));
+    }
+
+    for (size_t i = 0; i < nodos.size(); i++) {
+        if (i > 0) {
+            nodos[i]->anterior = nodos[i-1];
+        }
+        if (i < nodos.size() - 1) {
+            nodos[i]->siguiente = nodos[i+1];
+        }
+    }
+
+    std::cout << "Recorrido hacia adelante: ";
+    Nodo* actual = nodos[0];
+    while (actual != nullptr) {
+        std::cout << actual->dato << " ";
+        actual = actual->siguiente;
+    }
+
+    std::cout << "\nRecorrido hacia atras: ";
+    actual = nodos.back();
+    while (actual != nullptr) {
+        std::cout << actual->dato << " ";
+        actual = actual->anterior;
+    }
+
+    for (Nodo* nodo : nodos) {
+        delete nodo;
+    }
+    
+    return 0;
+}
