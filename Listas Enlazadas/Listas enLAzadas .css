@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+
+class Nodo {
+    public int Valor { get; set; }
+    public Nodo Siguiente { get; set; }
+    
+    public Nodo(int valor) {
+        Valor = valor;
+        Siguiente = null;
+    }
+}
+
+class Program {
+    static void MostrarLista(Nodo inicio) {
+        Nodo actual = inicio;
+        while (actual != null) {
+            Console.Write(actual.Valor + " ");
+            actual = actual.Siguiente;
+        }
+        Console.WriteLine();
+    }
+
+    static void Main() {
+        int[] valores = {5, 10, 15, 20, 25};
+        List<Nodo> nodos = new List<Nodo>();
+        
+        foreach (int v in valores) {
+            nodos.Add(new Nodo(v));
+        }
+        
+        for (int i = 0; i < nodos.Count - 1; i++) {
+            nodos[i].Siguiente = nodos[i+1];
+        }
+        
+        Console.Write("Lista enlazada: ");
+        MostrarLista(nodos[0]);
+    }
+}
